@@ -1,6 +1,8 @@
-# app.py
 
 from flask import Flask, render_template, request
+from nba_api import get_player, get_team 
+from flask import Flask, render_template, request
+
 app = Flask(__name__)
 
 # app.py
@@ -17,4 +19,9 @@ def search():
         data = get_player(id)
     elif type == 'team':
         data = get_team(id)
+    print(data)
     return render_template('result.html', data=data)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

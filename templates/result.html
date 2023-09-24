@@ -1,0 +1,23 @@
+<!-- templates/result.html -->
+
+{% if data %}
+    <h1>Results:</h1>
+    {% if data.first_name %} <!-- This checks if the data is for a player -->
+        <p><strong>ID:</strong> {{ data.id }}</p>
+        <p><strong>First Name:</strong> {{ data.first_name }}</p>
+        <p><strong>Last Name:</strong> {{ data.last_name }}</p>
+        <p><strong>Position:</strong> {{ data.position }}</p>
+        <p><strong>Height:</strong> {{ data.height_feet }} feet {{ data.height_inches }} inches</p>
+        <p><strong>Weight:</strong> {{ data.weight_pounds }} pounds</p>
+        <p><strong>Team:</strong> {{ data.team.full_name }}</p>
+    {% else %} <!-- This assumes the data is for a team -->
+        <p><strong>ID:</strong> {{ data.id }}</p>
+        <p><strong>Abbreviation:</strong> {{ data.abbreviation }}</p>
+        <p><strong>City:</strong> {{ data.city }}</p>
+        <p><strong>Conference:</strong> {{ data.conference }}</p>
+        <p><strong>Division:</strong> {{ data.division }}</p>
+        <p><strong>Full Name:</strong> {{ data.full_name }}</p>
+    {% endif %}
+{% else %}
+    <p>No results found.</p>
+{% endif %}
