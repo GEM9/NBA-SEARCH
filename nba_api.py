@@ -1,4 +1,4 @@
-import requests  # Import requests
+import requests  
 import json
 from prettytable import PrettyTable
 
@@ -6,6 +6,7 @@ from prettytable import PrettyTable
 RAPIDAPI_KEY = "c15875bd39mshd4bb1e52889c2f6p1ce620jsn6d371beecf72"
 
 
+# GET A PLAYER
 def get_player(player_id):
     url = f"https://free-nba.p.rapidapi.com/players/{player_id}"  # Corrected the URL
 
@@ -17,7 +18,7 @@ def get_player(player_id):
     response = requests.get(url, headers=headers)  # Using requests.get to make the HTTP GET request
     return response.json()  # Return the JSON response
 
-
+# PLAYER DATA TABLE
 def display_player(player_data):
     table = PrettyTable()
     table.field_names = [
@@ -37,24 +38,29 @@ def display_player(player_data):
     print(table)
 
 
-def menu():
-    while True:
-        print("1. Search a specific player")
-        print("2. Search a specific team")
-        print("3. Quit")
-        choice = input("Enter your choice: ")
+# GET A TEAM 
+def get_team(team_id):
+    url = f"https://free-nba.p.rapidapi.com/teams/{team_id}"
 
-        if choice == '1':
-            player_id = input("Enter the player ID: ")
-            player_data = get_player(player_id)
-            display_player(player_data)
-        elif choice == '2':
-            team_id = get_team()
-            diplay_team(team_id)
-        elif choice == '3':
-            break
-        else:
-            print("Invalid choice, please try again.")
+    headers = {
+        'X-RapidAPI-Key': RAPIDAPI_KEY,
+        'X-RapidAPI-Host': "free-nba.p.rapidapi.com"
+    }
 
+    response = requests.get(url, headers=headers)
+    return response.json()
 
-menu()
+# TEAM DATA TABLE
+def display_team(team_data):
+    table = PrettyTable()
+    table.field_names = ["ID", "Abbreviation", "City", "Conference", "Division", "Full Name"]
+    table.add_row([
+        team_data['id'],
+        team_data['abbreviation'],
+        team_data['city'],
+        team_data['conference'],
+        team_data['division'],
+        team_data['full_name']
+    ])
+    print(table)
+
