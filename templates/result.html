@@ -1,23 +1,46 @@
 <!-- templates/result.html -->
 
-{% if data %}
-    <h1>Results:</h1>
-    {% if data.first_name %} <!-- This checks if the data is for a player -->
-        <p><strong>ID:</strong> {{ data.id }}</p>
-        <p><strong>First Name:</strong> {{ data.first_name }}</p>
-        <p><strong>Last Name:</strong> {{ data.last_name }}</p>
-        <p><strong>Position:</strong> {{ data.position }}</p>
-        <p><strong>Height:</strong> {{ data.height_feet }} feet {{ data.height_inches }} inches</p>
-        <p><strong>Weight:</strong> {{ data.weight_pounds }} pounds</p>
-        <p><strong>Team:</strong> {{ data.team.full_name }}</p>
-    {% else %} <!-- This assumes the data is for a team -->
-        <p><strong>ID:</strong> {{ data.id }}</p>
-        <p><strong>Abbreviation:</strong> {{ data.abbreviation }}</p>
-        <p><strong>City:</strong> {{ data.city }}</p>
-        <p><strong>Conference:</strong> {{ data.conference }}</p>
-        <p><strong>Division:</strong> {{ data.division }}</p>
-        <p><strong>Full Name:</strong> {{ data.full_name }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100"> <!-- Added classes here -->
+    {% if data %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Results:</h5>
+            {% if data.first_name %} <!-- This checks if the data is for a player -->
+                <p><strong>ID:</strong> {{ data.id }}</p>
+                <p><strong>First Name:</strong> {{ data.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ data.last_name }}</p>
+                <p><strong>Position:</strong> {{ data.position }}</p>
+                <p><strong>Height:</strong> {{ data.height_feet }} feet {{ data.height_inches }} inches</p>
+                <p><strong>Weight:</strong> {{ data.weight_pounds }} pounds</p>
+                <p><strong>Team:</strong> {{ data.team.full_name }}</p>
+            {% else %} <!-- This assumes the data is for a team -->
+                <p><strong>ID:</strong> {{ data.id }}</p>
+                <p><strong>Abbreviation:</strong> {{ data.abbreviation }}</p>
+                <p><strong>City:</strong> {{ data.city }}</p>
+                <p><strong>Conference:</strong> {{ data.conference }}</p>
+                <p><strong>Division:</strong> {{ data.division }}</p>
+                <p><strong>Full Name:</strong> {{ data.full_name }}</p>
+            {% endif %}
+        </div>
+        <a href="/" class="btn btn-primary"> Home </a> 
+
+        <button href="index.html" type="submit" class="btn btn-primary"> Add to Team </button> 
+    </div>
+    {% else %}
+        <p>No results found.</p>
     {% endif %}
-{% else %}
-    <p>No results found.</p>
-{% endif %}
+
+    <!-- Add Bootstrap JS and Popper.js link -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
